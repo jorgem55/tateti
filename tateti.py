@@ -1,5 +1,5 @@
 #Created by Jorge Martinez
-import random
+import random, os
 
 uL=uC=uR=mL=mC=mR=dL=dC=dR=winner=pcPiece=piece=''
 # placeList={uL:'',uC:'',uR:'',mL:'',mC:'',mR:'',dL:'',dC:'',dR:'',}
@@ -14,8 +14,8 @@ def board(uL,uC,uR,mL,mC,mR,dL,dC,dR):
     print(' --------------\n')
     
 def inicio(piece):
-    print('\n      ----------------------------------\n          >> Bienvenido a TaTeTi <<\n         ---------------------------')
-    print('         >> Welcome to TicTacToe <<\n   --------------------------------------------\n    >> Creado por/Created by Jorge Martinez <<\n')
+    print('\n      ----------------------------------\n          >> Bienvenido a TaTeTi <<\n          --------------------------')
+    print('         >> Welcome to TicTacToe <<\n      ----------------------------------\n              -by JorgeMartinez-\n')
     while piece != 'X' and piece != 'O':
         piece=input('** Con que ficha quieres jugar? ( X  ó  O ): ')
         piece=piece.upper()
@@ -140,6 +140,7 @@ if __name__ == '__main__':
     else:                    
         print('**',winner, 'ha/s ganado esta partida !!!')
     print('** Gracias por jugar !!!\n')
+    os.system("pause")
     
     
     
