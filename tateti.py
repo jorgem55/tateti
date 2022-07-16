@@ -73,13 +73,11 @@ def put(uL,uC,uR,mL,mC,mR,dL,dC,dR):
             dR=piece
         else: #Ya contiene ficha o erroneo
             place=''
-            print('\n* No es un casillero válido o ese casillero ya tiene ficha, ingrese otro')
-    
+            print('\n* No es un casillero válido o ese casillero ya tiene ficha, ingrese otro')    
     return uL,uC,uR,mL,mC,mR,dL,dC,dR
 
 def get_winner(uL,uC,uR,mL,mC,mR,dL,dC,dR):
     winner=''
-    
     if (uL==uC=='O' and uC==uR=='O') or (uL==uC=='X' and uC==uR=='X'):
         winner='Y'
     elif (mL==mC=='O' and mC==mR=='O')or (mL==mC=='X' and mC==mR=='X'):
@@ -96,7 +94,6 @@ def get_winner(uL,uC,uR,mL,mC,mR,dL,dC,dR):
         winner='Y'
     elif (uR==mC=='O' and mC==dL=='O')or(uR==mC=='X' and mC==dL=='X'):
         winner='Y'
-    
     return winner
 
 def game(uL,uC,uR,mL,mC,mR,dL,dC,dR):
@@ -105,7 +102,7 @@ def game(uL,uC,uR,mL,mC,mR,dL,dC,dR):
         winner = '* Ganaste esta partida !!!'
     else: # sino aplicar nueva ficha de la PC
         pcPlace =''
-        pcPlace=crussesPC() #jugada defensiva inteligente de PC
+        pcPlace=crussesPC() #jugada defensiva de PC
         if pcPlace!='':
             if pcPlace=='uL' and uL=='':
                 uL=pcPiece
@@ -127,37 +124,30 @@ def game(uL,uC,uR,mL,mC,mR,dL,dC,dR):
                 dR=pcPiece
             else:
                 pcPlace=''
-    
-        while pcPlace=='': 
-            pcPlace = random.randrange(0,9)
-            if pcPlace==0 and uL=='':
-                uL=pcPiece
-            elif pcPlace == 1 and uC=='':
-                uC=pcPiece
-            elif pcPlace == 2 and uR=='':
-                uR=pcPiece
-            elif pcPlace == 3 and mL=='':
-                mL=pcPiece
-            elif pcPlace == 4 and mC=='':
-                mC=pcPiece
-            elif pcPlace == 5 and mR=='':
-                mR=pcPiece
-            elif pcPlace == 6 and dL=='':
-                dL=pcPiece
-            elif pcPlace == 7 and dC=='':
-                dC=pcPiece
-            elif pcPlace == 8 and dR=='':
-                dR=pcPiece
-            elif uL!=''and uC!=''and uR!=''and mL!=''and mC!=''and mR!=''and dL!=''and dC!=''and dR!='': #si el tablero esta todo ocupado
-                pcPlace='tie'
-            else:
-                pcPlace=''
-        
-        #ver si con nueva ficha PC forma linea
-        if get_winner(uL,uC,uR,mL,mC,mR,dL,dC,dR) == 'Y':
+        while pcPlace=='': #aplicar ficha al azar
+                pcPlace = random.randrange(0,9)
+                if pcPlace==0 and uL=='':
+                    uL=pcPiece
+                elif pcPlace == 1 and uC=='':
+                    uC=pcPiece
+                elif pcPlace == 2 and uR=='':
+                    uR=pcPiece
+                elif pcPlace == 3 and mL=='':
+                    mL=pcPiece
+                elif pcPlace == 4 and mC=='':
+                    mC=pcPiece
+                elif pcPlace == 5 and mR=='':
+                    mR=pcPiece
+                elif pcPlace == 6 and dL=='':
+                    dL=pcPiece
+                elif pcPlace == 7 and dC=='':
+                    dC=pcPiece
+                elif pcPlace == 8 and dR=='':
+                    dR=pcPiece
+                else:
+                    pcPlace=''
+        if get_winner(uL,uC,uR,mL,mC,mR,dL,dC,dR) == 'Y': #ver si con nueva ficha PC forma linea
             winner = '* La PC ha ganado esta partida !!!'
-            if winner=='' and pcPlace=='tie':
-                winner = 'tie'
 		
     return winner,uL,uC,uR,mL,mC,mR,dL,dC,dR
     
@@ -187,25 +177,19 @@ if __name__ == '__main__':
         print('- Empezas vos...\n')
     elif num==2: #'pc'
         print('- Empieza la PC...\n')
-        #verifica ganador, sino aplica ficha de PC y vuelve a verificar
-        winner,uL,uC,uR,mL,mC,mR,dL,dC,dR = game(uL,uC,uR,mL,mC,mR,dL,dC,dR)
-        #imprime tablero
-        board(uL,uC,uR,mL,mC,mR,dL,dC,dR)
+        winner,uL,uC,uR,mL,mC,mR,dL,dC,dR = game(uL,uC,uR,mL,mC,mR,dL,dC,dR) #verifica ganador, sino aplica ficha de PC y vuelve a verificar
+        board(uL,uC,uR,mL,mC,mR,dL,dC,dR) #imprime tablero
         
     while winner == '':
-        #pide casillero al user
-        uL,uC,uR,mL,mC,mR,dL,dC,dR=put(uL,uC,uR,mL,mC,mR,dL,dC,dR) 
-        
-        #verifica ganador, sino aplica ficha de PC y vuelve a verificar
-        winner,uL,uC,uR,mL,mC,mR,dL,dC,dR = game(uL,uC,uR,mL,mC,mR,dL,dC,dR)
-        
-        #imprime tablero
-        board(uL,uC,uR,mL,mC,mR,dL,dC,dR)
-        
-    if winner == 'tie':
-        print('* Has empatado esta partida\n * Inicia otra partida')
-    else:                    
-        print(winner)
+        uL,uC,uR,mL,mC,mR,dL,dC,dR=put(uL,uC,uR,mL,mC,mR,dL,dC,dR) #pide casillero al user
+        if uL!=''and uC!=''and uR!=''and mL!=''and mC!=''and mR!=''and dL!=''and dC!=''and dR!='': #si el tablero esta lleno
+            winner='* Has empatado esta partida\n * Inicia otra partida'
+        else:
+            winner,uL,uC,uR,mL,mC,mR,dL,dC,dR = game(uL,uC,uR,mL,mC,mR,dL,dC,dR) #verifica ganador, sino aplica ficha de PC y vuelve a verificar
+            board(uL,uC,uR,mL,mC,mR,dL,dC,dR) #imprime tablero
+        if uL!=''and uC!=''and uR!=''and mL!=''and mC!=''and mR!=''and dL!=''and dC!=''and dR!='' and winner == '': #si el tablero esta lleno
+            winner='* Has empatado esta partida\n* Inicia otra partida'
+    print(winner)
     print('* Gracias por participar !!!\n')
     os.system("pause")
     
