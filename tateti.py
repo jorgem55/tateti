@@ -5,40 +5,40 @@ uL=uC=uR=mL=mC=mR=dL=dC=dR=winner=pcPiece=piece=''
 # placeList={uL:'',uC:'',uR:'',mL:'',mC:'',mR:'',dL:'',dC:'',dR:'',}
 
 def board(uL,uC,uR,mL,mC,mR,dL,dC,dR):
-    print(' --------------')
-    print('| ',uL, ' | ', uC, ' | ', uR,' |')
-    print(' --------------')
-    print('| ',mL, ' | ', mC, ' | ', mR,' |')
-    print(' --------------')
-    print('| ',dL, ' | ', dC, ' | ', dR,' |')
-    print(' --------------\n')
+    print('\t ---------------')
+    print('\t| ',uL, ' | ', uC, ' | ', uR,' |')
+    print('\t ---------------')
+    print('\t| ',mL, ' | ', mC, ' | ', mR,' |')
+    print('\t ---------------')
+    print('\t| ',dL, ' | ', dC, ' | ', dR,' |')
+    print('\t ---------------\n')
     
-def crussesPC(): #jugada defensiva PC
+def crussesPC(): #jugada defensiva de PC
     pcPlace=''
     if (uL==uC==piece or dL==mC==piece or mR==dR==piece) and uR=='':
-        pcPlace='uR'
+        pcPlace='UR'
     elif (uR==uC==piece or dR==mC==piece or dL==mL==piece) and uL=='':
-        pcPlace='uL'
+        pcPlace='UL'
     elif (mR==mC==piece or dL==uL==piece) and mL=='':
-        pcPlace='mL'
+        pcPlace='ML'
     elif (mL==mC==piece or uR==dR==piece) and mR=='':
-        pcPlace='mR'
+        pcPlace='MR'
     elif (dR==dC==piece or mL==uL==piece or uR==mC==piece) and dL=='':
-        pcPlace='dL'
+        pcPlace='DL'
     elif (dL==dC==piece or mR==uR==piece or uL==mC==piece) and dR=='':
-        pcPlace='dR'
+        pcPlace='DR'
     elif (dC==mC==piece or uR==uL==piece) and uC=='':
-        pcPlace='uC'
+        pcPlace='UC'
     elif (dL==dR==piece or uC==mC==piece) and dC=='':
-        pcPlace='dC'
+        pcPlace='DC'
     elif (dL==uR==piece or uL==dR==piece or mR==mL==piece or uC==dC==piece) and mC=='':
-        pcPlace='mC'
+        pcPlace='MC'
         
     return pcPlace
     
 def start(piece):
-    print('\n      ----------------------------------\n          >> Bienvenido a TaTeTi <<\n          --------------------------')
-    print('         >> Welcome to TicTacToe <<\n      ----------------------------------\n              -by JorgeMartinez-\n')
+    print('\n      ---------------------------------------------\n          >> Bienvenido a TaTeTi (TicTacToe) <<\n          -------------------------------------')
+    print('                  -by JorgeMartinez-\n')
     while piece != 'X' and piece != 'O':
         piece=input('* Con que ficha quieres jugar? ( X  ó  O ): ')
         piece=piece.upper()
@@ -51,29 +51,30 @@ def start(piece):
     
 def put(uL,uC,uR,mL,mC,mR,dL,dC,dR):
     place=''
-    while place != 'uL' and place != 'uC' and place != 'uR' and place != 'mL' and place != 'mC' and place != 'mR' and place != 'dL' and place != 'dC' and place != 'dR':
+    while place != 'UL' and place != 'UC' and place != 'UR' and place != 'ML' and place != 'MC' and place != 'MR' and place != 'DL' and place != 'DC' and place != 'DR':
         place = input('* Donde queres poner tu proxima ficha? [uL,uC,uR,mL,mC,mR,dL,dC,dR]: ')
-        if place == 'uL' and uL=='':
+        place = place.upper()
+        if place == 'UL' and uL=='':
             uL=piece
-        elif place == 'uC' and uC=='':
+        elif place == 'UC' and uC=='':
             uC=piece
-        elif place == 'uR' and uR=='':
+        elif place == 'UR' and uR=='':
             uR=piece
-        elif place == 'mL' and mL=='':
+        elif place == 'ML' and mL=='':
             mL=piece
-        elif place == 'mC' and mC=='':
+        elif place == 'MC' and mC=='':
             mC=piece
-        elif place == 'mR' and mR=='':
+        elif place == 'MR' and mR=='':
             mR=piece
-        elif place == 'dL' and dL=='':
+        elif place == 'DL' and dL=='':
             dL=piece
-        elif place == 'dC' and dC=='':
+        elif place == 'DC' and dC=='':
             dC=piece
-        elif place == 'dR' and dR=='':
+        elif place == 'DR' and dR=='':
             dR=piece
-        else: #Ya contiene ficha o erroneo
+        else: #Ya contiene ficha o es erroneo
             place=''
-            print('\n* No es un casillero válido o ese casillero ya tiene ficha, ingrese otro')    
+            print('\n* No es un casillero válido o ese casillero ya tiene ficha, ingrese nuevamente')    
     return uL,uC,uR,mL,mC,mR,dL,dC,dR
 
 def get_winner(uL,uC,uR,mL,mC,mR,dL,dC,dR):
@@ -104,23 +105,23 @@ def game(uL,uC,uR,mL,mC,mR,dL,dC,dR):
         pcPlace =''
         pcPlace=crussesPC() #jugada defensiva de PC
         if pcPlace!='':
-            if pcPlace=='uL' and uL=='':
+            if pcPlace=='UL' and uL=='':
                 uL=pcPiece
-            elif pcPlace=='uC' and uC=='':
+            elif pcPlace=='UC' and uC=='':
                 uC=pcPiece
-            elif pcPlace=='uR' and uR=='':
+            elif pcPlace=='UR' and uR=='':
                 uR=pcPiece
-            elif pcPlace=='mL' and mL=='':
+            elif pcPlace=='ML' and mL=='':
                 mL=pcPiece
-            elif pcPlace=='mC' and mC=='':
+            elif pcPlace=='MC' and mC=='':
                 mC=pcPiece
-            elif pcPlace=='mR' and mR=='':
+            elif pcPlace=='MR' and mR=='':
                 mR=pcPiece
-            elif pcPlace=='dL' and dL=='':
+            elif pcPlace=='DL' and dL=='':
                 dL=pcPiece
-            elif pcPlace=='dC' and dC=='':
+            elif pcPlace=='DC' and dC=='':
                 dC=pcPiece
-            elif pcPlace=='dR' and dR=='':
+            elif pcPlace=='DR' and dR=='':
                 dR=pcPiece
             else:
                 pcPlace=''
@@ -156,14 +157,13 @@ def game(uL,uC,uR,mL,mC,mR,dL,dC,dR):
 if __name__ == '__main__':    
     piece,pcPiece=start(piece)    
     print('* Este es el tablero:\n')
-    print(' -----------------')
-    print('| uL  |  uC |  uR |')
-    print(' -----------------')
-    print('| mL  |  mC |  mR |')
-    print(' -----------------')
-    print('| dL  |  dC |  dR |')
-    print(' -----------------\n')
-    time.sleep(1)
+    print('\t\t -----------------')
+    print('\t\t| uL  |  uC |  uR |')
+    print('\t\t -----------------')
+    print('\t\t| mL  |  mC |  mR |')
+    print('\t\t -----------------')
+    print('\t\t| dL  |  dC |  dR |')
+    print('\t\t -----------------\n')
     print('* Al azar, veamos quien empieza jugando...')
     time.sleep(1)
     print('...')
@@ -183,14 +183,14 @@ if __name__ == '__main__':
     while winner == '':
         uL,uC,uR,mL,mC,mR,dL,dC,dR=put(uL,uC,uR,mL,mC,mR,dL,dC,dR) #pide casillero al user
         if uL!=''and uC!=''and uR!=''and mL!=''and mC!=''and mR!=''and dL!=''and dC!=''and dR!='': #si el tablero esta lleno
-            winner='* Has empatado esta partida\n * Inicia otra partida'
+            winner='* Has empatado esta partida... Inicia otra partida!'
         else:
             winner,uL,uC,uR,mL,mC,mR,dL,dC,dR = game(uL,uC,uR,mL,mC,mR,dL,dC,dR) #verifica ganador, sino aplica ficha de PC y vuelve a verificar
             board(uL,uC,uR,mL,mC,mR,dL,dC,dR) #imprime tablero
-        if uL!=''and uC!=''and uR!=''and mL!=''and mC!=''and mR!=''and dL!=''and dC!=''and dR!='' and winner == '': #si el tablero esta lleno
-            winner='* Has empatado esta partida\n* Inicia otra partida'
+        if uL!='' and uC!='' and uR!='' and mL!='' and mC!='' and mR!='' and dL!='' and dC!='' and dR!='' and winner == '': #si el tablero esta lleno
+            winner='* Has empatado esta partida... Inicia otra partida!'
     print(winner)
-    print('* Gracias por participar !!!\n')
+    print('* Gracias por jugar !!!\n')
     os.system("pause")
     
     
@@ -198,46 +198,46 @@ if __name__ == '__main__':
 # def movement():
 #     move1=''
 #     move2=''
-#     while move1 != 'uL' and move1 != 'uC' and move1 != 'uR' and move1 != 'mL' and move1 != 'mC' and move1 != 'mR' and move1 != 'dL' and move1 != 'dC' and move1 != 'dR':
-#         while move2 != 'uL' and move2 != 'uC' and move2 != 'uR' and move2 != 'mL' and move2 != 'mC' and move2 != 'mR' and move2 != 'dL' and move2 != 'dC' and move2 != 'dR':
+#     while move1 != 'UL' and move1 != 'UC' and move1 != 'UR' and move1 != 'ML' and move1 != 'MC' and move1 != 'MR' and move1 != 'DL' and move1 != 'DC' and move1 != 'DR':
+#         while move2 != 'UL' and move2 != 'UC' and move2 != 'UR' and move2 != 'ML' and move2 != 'MC' and move2 != 'MR' and move2 != 'DL' and move2 != 'DC' and move2 != 'DR':
 #             while move1 == move2:
 #                 move1 = input('Cual es tu proximo movimiento? \n Desde... [uL,uC,uR,mL,mC,mR,dL,dC,dR]: ')
 #                 move2 = input('Hacia... [uL,uC,uR,mL,mC,mR,dL,dC,dR]: ')
 #             if move1 != move2:
-#                 if move2 == 'uL':
+#                 if move2 == 'UL':
 #                     uL=piece
-#                 elif move2 == 'uC':
+#                 elif move2 == 'UC':
 #                     uC=piece
-#                 elif move2 == 'uR':
+#                 elif move2 == 'UR':
 #                     uR=piece
-#                 elif move2 == 'mL':
+#                 elif move2 == 'ML':
 #                     mL=piece
-#                 elif move2 == 'mC':
+#                 elif move2 == 'MC':
 #                     mC=piece
-#                 elif move2 == 'mR':
+#                 elif move2 == 'MR':
 #                     mR=piece
-#                 elif move2 == 'dL':
+#                 elif move2 == 'DL':
 #                     dL=piece
-#                 elif move2 == 'dC':
+#                 elif move2 == 'DC':
 #                     dC=piece
 #                 else:
 #                     dR=piece
 #                 # asdasd
-#                 if move1 == 'uL':
+#                 if move1 == 'UL':
 #                     uL=piece
-#                 elif move1 == 'uC':
+#                 elif move1 == 'UC':
 #                     uC=piece
-#                 elif move1 == 'uR':
+#                 elif move1 == 'UR':
 #                     uR=piece
-#                 elif move1 == 'mL':
+#                 elif move1 == 'ML':
 #                     mL=piece
-#                 elif move1 == 'mC':
+#                 elif move1 == 'MC':
 #                     mC=piece
-#                 elif move1 == 'mR':
+#                 elif move1 == 'MR':
 #                     mR=piece
-#                 elif move1 == 'dL':
+#                 elif move1 == 'DL':
 #                     dL=piece
-#                 elif move1 == 'dC':
+#                 elif move1 == 'DC':
 #                     dC=piece
 #                 else:
 #                     dR=piece
